@@ -3,8 +3,8 @@
         <active>true</active>
         <business_calendar/>
         <condition><![CDATA[// var answer='false';
-// answer = new ZynderTechUtils().gitPushCondition(answer);
-// answer == 'true' ;]]></condition>
+// answer = new ZynderTechUtils().gitPushConditionZynderTech(answer);
+answer == 'true' ;]]></condition>
         <conditional>true</conditional>
         <entered_time>1970-01-01 00:00:00</entered_time>
         <max_drift/>
@@ -28,14 +28,14 @@ new ZynderTechUtils().gitRestApiZynderTech();
         <sys_created_by>AM</sys_created_by>
         <sys_created_on>2025-02-17 10:20:17</sys_created_on>
         <sys_id>8cc2e859c3b7121052237405e40131d2</sys_id>
-        <sys_mod_count>44</sys_mod_count>
+        <sys_mod_count>47</sys_mod_count>
         <sys_name>Metadata push to Git - Zynder Tech</sys_name>
         <sys_package display_value="Zynder Tech" source="8d447286c3a3121052237405e4013105">8d447286c3a3121052237405e4013105</sys_package>
         <sys_policy/>
         <sys_scope display_value="Zynder Tech">8d447286c3a3121052237405e4013105</sys_scope>
         <sys_update_name>sysauto_script_8cc2e859c3b7121052237405e40131d2</sys_update_name>
-        <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2025-06-12 07:32:31</sys_updated_on>
+        <sys_updated_by>Sreerag.Anchery</sys_updated_by>
+        <sys_updated_on>2025-08-06 11:22:51</sys_updated_on>
         <time_zone/>
         <upgrade_safe>false</upgrade_safe>
     </sysauto_script>

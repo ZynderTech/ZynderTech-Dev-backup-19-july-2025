@@ -17,7 +17,14 @@ ZynderTechUtils.prototype = {
     //function used for metadata push to git
 
     gitRestApiZynderTech: function() {
-		gs.info("Started commit from zynder tech");
+        gs.info("Started commit from zynder tech");
+
+        var gr = new GlideRecord('sys_schema_attribute_m2m');
+        gr.get('046a08cde15352105590bd68cbbecb09');
+        gr.value = true;
+        gr.setWorkflow(false);
+        gr.update();
+
         var instanceName = gs.getProperty('instance_name');
         var appID = gs.getProperty('REST.git.push.appIDZynderTech');
         var repoID = gs.getProperty('REST.git.push.RepoIDZynderTech');
@@ -49,14 +56,14 @@ ZynderTechUtils.prototype = {
             }
 
         }
-		gs.info("Completed commit from zynder tech");
+        gs.info("Completed commit from zynder tech");
 
 
         // gs.log(JSON.stringify(response.getBody()));
 
     },
 
-	gitRestApiZynderDataHub: function() {
+    gitRestApiZynderDataHub: function() {
         var instanceName = gs.getProperty('instance_name');
         var appID = gs.getProperty('REST.git.push.appIDZynderDataHub');
         var repoID = gs.getProperty('REST.git.push.RepoIDZynderDataHub');
@@ -94,7 +101,7 @@ ZynderTechUtils.prototype = {
 
     },
 
-	gitRestApiZynderAttachments: function() {
+    gitRestApiZynderAttachments: function() {
         var instanceName = gs.getProperty('instance_name');
         var appID = gs.getProperty('REST.git.push.appIDZynderAttachments');
         var repoID = gs.getProperty('REST.git.push.RepoIDZynderAttachments');
@@ -133,10 +140,37 @@ ZynderTechUtils.prototype = {
     },
 
 
-    gitPushCondition: function(answer) {
+    gitPushConditionZynderTech: function(answer) {
 
+        var appID = gs.getProperty('REST.git.push.appIDZynderTech');
         var gr = new GlideRecord("sys_metadata");
-        gr.addEncodedQuery("sys_scope=8d447286c3a3121052237405e4013105^sys_updated_on>=javascript:gs.beginningOfLastHour()");
+        gr.addEncodedQuery("sys_scope=" + appID + "^sys_updated_on>=javascript:gs.beginningOfLastHour()");
+        gr.query();
+        if (gr.next()) {
+            answer = 'true';
+
+        }
+        return answer;
+    },
+
+    gitPushConditionZynderData: function(answer) {
+
+        var appID = gs.getProperty('REST.git.push.appIDZynderDataHub');
+        var gr = new GlideRecord("sys_metadata");
+        gr.addEncodedQuery("sys_scope=" + appID + "^sys_updated_on>=javascript:gs.beginningOfLastHour()");
+        gr.query();
+        if (gr.next()) {
+            answer = 'true';
+
+        }
+        return answer;
+    },
+
+    gitPushConditionZynderAttachment: function(answer) {
+
+        var appID = gs.getProperty('REST.git.push.appIDZynderAttachments');
+        var gr = new GlideRecord("sys_metadata");
+        gr.addEncodedQuery("sys_scope=" + appID + "^sys_updated_on>=javascript:gs.beginningOfLastHour()");
         gr.query();
         if (gr.next()) {
             answer = 'true';
@@ -271,7 +305,7 @@ ZynderTechUtils.prototype = {
         //Scheduled job to create metadata for records that were updated in the last hour.
 
         try {
-            gs.info("Metadata Running");         
+            gs.info("Metadata Running");
             var dir_choicelist = 'update';
             var recCntr = 0;
             var invRecCntr = 0;
@@ -279,8 +313,8 @@ ZynderTechUtils.prototype = {
             var gr = new GlideRecord('u_git_sync_metadata');
             //gr.addQuery('sys_updated_on', 'ON', 'Last hour@javascript:gs.beginningOfLastHour()@javascript:gs.endOfLastHour()');
             gr.addQuery('u_active', "true");
-			gr.addQuery('sys_scope',gs.getCurrentApplicationId());
-			
+            gr.addQuery('sys_scope', gs.getCurrentApplicationId());
+
             gr.query();
             while (gr.next()) {
                 var current_table = gr.u_table_name.toString();
@@ -543,14 +577,14 @@ ZynderTechUtils.prototype = {
         <sys_created_by>AK</sys_created_by>
         <sys_created_on>2025-02-08 08:22:13</sys_created_on>
         <sys_id>5191f992c3a3521052237405e401311a</sys_id>
-        <sys_mod_count>102</sys_mod_count>
+        <sys_mod_count>104</sys_mod_count>
         <sys_name>ZynderTechUtils</sys_name>
         <sys_package display_value="Zynder Tech" source="8d447286c3a3121052237405e4013105">8d447286c3a3121052237405e4013105</sys_package>
         <sys_policy/>
         <sys_scope display_value="Zynder Tech">8d447286c3a3121052237405e4013105</sys_scope>
         <sys_update_name>sys_script_include_5191f992c3a3521052237405e401311a</sys_update_name>
-        <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2025-06-12 07:43:02</sys_updated_on>
+        <sys_updated_by>Sreerag.Anchery</sys_updated_by>
+        <sys_updated_on>2025-08-05 11:40:03</sys_updated_on>
     </sys_script_include>
     <sys_es_latest_script action="INSERT_OR_UPDATE">
         <id>5191f992c3a3521052237405e401311a</id>
